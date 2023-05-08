@@ -7,7 +7,6 @@ def main():
         print("Failed to init brain module", sys.stderr)
         return -1
 
-
     theBrain = brain.Brain();
     if not theBrain.initPosition(1.2):
         print("Failed to init position", sys.stderr)
@@ -21,6 +20,10 @@ def main():
         
     if not theBrain.initNetFunction("mul"):
         print("Failed to brain net function", sys.stderr)
+        return -1
+
+    if not theBrain.initPrintEachNSteps(5):
+        print("Failed to brain print cycle", sys.stderr)
         return -1
 
     if not theBrain.initDone():

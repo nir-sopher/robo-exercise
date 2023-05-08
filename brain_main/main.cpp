@@ -24,7 +24,13 @@ int main()
 
     if (!brain.initNetFunction(brain::NetFunctionMul::s_getTypeName()))
     {
-        std::cerr << "Failed to brain net function ";
+        std::cerr << "Failed to brain net function";
+        return -1;
+    }
+
+    if (!brain.initPrintEachNSteps(10))
+    {
+        std::cerr << "Failed to brain print";
         return -1;
     }
 
@@ -40,7 +46,7 @@ int main()
         return -1;
     }
 
-    std::this_thread::sleep_for(std::chrono::seconds(3));
+    std::this_thread::sleep_for(std::chrono::milliseconds(3000));
 
     brain.terminate();
 

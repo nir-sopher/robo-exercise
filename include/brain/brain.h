@@ -18,6 +18,8 @@ namespace brain
 
         bool initNetFunction(const std::string &aNEtFunctionType);
 
+        bool initPrintEachNSteps(int64_t aN);
+
         bool initDone();
 
         // start working
@@ -33,6 +35,7 @@ namespace brain
         std::shared_ptr<MotorsLoop> myMotorsLoop;
         std::shared_ptr<PositionLoop> myPositionLoop;
         std::shared_ptr<MainLoop> myMainLoop;
+        int64_t myPrintEachNSteps = 0;
 
         bool myInitDone = false;
 

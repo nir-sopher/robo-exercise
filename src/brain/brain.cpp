@@ -46,6 +46,17 @@ namespace brain
         return true;
     }
 
+    bool Brain::initPrintEachNSteps(int64_t aN)
+    {
+        if (myInitDone)
+        {
+            // TODO ERROR init done
+            return false;
+        }
+        myPrintEachNSteps = aN;
+        return true;
+    }
+
     bool Brain::initDone()
     {
         if (myInitDone)
@@ -75,6 +86,10 @@ namespace brain
         myPositionLoop.reset(new PositionLoop(myInitialPosState));
         myMotorsLoop.reset(new MotorsLoop(myMotorsInitialState));
         myMainLoop.reset(new MainLoop(myMotorsLoop, myPositionLoop, myNetFunctionP));
+
+        if (myPrintEachNSteps > 0){
+            myMainLoop->setPrintEachNSteps(myPrintEachNSteps);
+        }
 
         myInitDone = true;
         return true;

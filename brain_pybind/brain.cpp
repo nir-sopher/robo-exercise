@@ -19,6 +19,7 @@ PYBIND11_MODULE(brain, m)
         .def("initPosition", &Brain::initPosition, "Override the initial position. Default is 0")
         .def("initAddMotor", &Brain::initAddMotor, "Define a new motor and its position")
         .def("initNetFunction", &Brain::initNetFunction, "Override the net function. Default is 'identity'")
+        .def("initPrintEachNSteps", &Brain::initPrintEachNSteps, "Set printouts each N steps of the main loop")
         .def("initDone", &Brain::initDone, "Mark initialization as done")
         .def("launch", &Brain::launch, "Launch the robot")
         .def("terminate", &Brain::terminate, "Shutdown the robot");

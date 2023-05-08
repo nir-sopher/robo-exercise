@@ -15,6 +15,10 @@ namespace brain
         MainLoop(const std::shared_ptr<MotorsLoop> &aMotorsLoopP, const std::shared_ptr<PositionLoop> &aPositionLoopP,
                  const std::shared_ptr<::infra::NetFunction> &aNetFunctionP, int64_t aPeriodUs = 100000);
 
+        void setPrintEachNSteps(int64_t aN) {
+            myPrintEachNSteps = aN;
+        }
+
     protected:
         virtual bool step() final;
 
@@ -22,5 +26,8 @@ namespace brain
         std::shared_ptr<MotorsLoop> myMotorLoopP;
         std::shared_ptr<PositionLoop> myPositionLoopP;
         std::shared_ptr<::infra::NetFunction> myNetFunctionP;
+
+        int64_t myStepsCount = 0;
+        int64_t myPrintEachNSteps = 0;
     };
 } // namespace
