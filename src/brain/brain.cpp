@@ -1,37 +1,93 @@
 #include "brain/brain.h"
-#include "brain/net_function_mul.h"
+#include "brain/net_function_identity.h"
 
 namespace brain
 {
-    bool Brain::init()
+
+    infra::State myInitialPosState;
+    infra::State myMotorsInitialState;
+    std::shared_ptr<infra::NetFunction> myNetFunctionP;
+
+    bool Brain::initPosition(double aInitialPosition)
     {
-        infra::State initialPosState;
-        initialPosState[brain::PositionLoop::POS_KEY] = 1;
-        myPositionLoop.reset(new PositionLoop(initialPosState));
-
-        int numMotors = 10;
-        infra::State motorsInitialState;
-        for (int i = 0; i < numMotors; ++i)
+        if (myInitDone)
         {
-            motorsInitialState[std::to_string(i)] = i;
+            // TODO ERROR init done
+            return false;
         }
-        myMotorsLoop.reset(new MotorsLoop(motorsInitialState));
+        myInitialPosState[brain::PositionLoop::POS_KEY] = aInitialPosition;
+        return true;
+    }
 
-        std::shared_ptr<infra::NetFunction> netFunctionP(
-            infra::NetFunction::s_getByTypeUnsafe(brain::NetFunctionMul::s_getTypeName()));
-        if (netFunctionP.get() == NULL)
+    bool Brain::initAddMotor(const std::string &aMotorId, double aInitialPosition)
+    {
+        if (myInitDone)
+        {
+            // TODO ERROR init done
+            return false;
+        }
+        myMotorsInitialState[aMotorId] = aInitialPosition;
+        return true;
+    }
+
+    bool Brain::initNetFunction(const std::string &aNetFunctionType)
+    {
+        if (myInitDone)
+        {
+            // TODO ERROR init done
+            return false;
+        }
+        myNetFunctionP.reset(infra::NetFunction::s_getByTypeUnsafe(aNetFunctionType));
+        if (myNetFunctionP.get() == NULL)
         {
             // TODO ERROR - no such type
             return false;
         }
+        return true;
+    }
 
-        myMainLoop.reset(new MainLoop(myMotorsLoop, myPositionLoop, netFunctionP));
+    bool Brain::initDone()
+    {
+        if (myInitDone)
+        {
+            // TODO ERROR init done
+            return false;
+        }
 
+        if (myInitialPosState.size() == 0)
+        {
+            // pos not init - set to 0
+            if (!initPosition(0))
+            {
+                return false;
+            }
+        }
+
+        if (myNetFunctionP.get() == NULL)
+        {
+            // net function not set - set to identity
+            if (!initNetFunction(NetFunctionIdentity::s_getTypeName()))
+            {
+                return false;
+            }
+        }
+
+        myPositionLoop.reset(new PositionLoop(myInitialPosState));
+        myMotorsLoop.reset(new MotorsLoop(myMotorsInitialState));
+        myMainLoop.reset(new MainLoop(myMotorsLoop, myPositionLoop, myNetFunctionP));
+
+        myInitDone = true;
         return true;
     }
 
     bool Brain::launch()
     {
+        if (!myInitDone)
+        {
+            // TODO ERROR init not done
+            return false;
+        }
+
         if (!myPositionLoop->launch())
         {
             // TODO ERROR "Failed to launch position loop";
@@ -52,6 +108,12 @@ namespace brain
 
     void Brain::terminate()
     {
+        if (!myInitDone)
+        {
+            // TODO ERROR init not done
+            return;
+        }
+
         myPositionLoop->terminate();
         myMotorsLoop->terminate();
         myMainLoop->terminate();

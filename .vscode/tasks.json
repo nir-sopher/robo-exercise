@@ -11,7 +11,7 @@
                 "-g",
                 "${workspaceFolder}/src/*/*.cpp",
                 "-g",
-                "${workspaceFolder}/src/*.cpp",
+                "${workspaceFolder}/brain_main/main.cpp",
                 "-I",
                 "${workspaceFolder}/include"
             ],
