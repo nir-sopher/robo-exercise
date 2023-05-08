@@ -7,7 +7,7 @@
             "args": [
                 "-fdiagnostics-color=always",
                 "-o",
-                "${workspaceFolder}/out/brain",
+                "${workspaceFolder}/out/brain-cpp",
                 "-g",
                 "${workspaceFolder}/src/*/*.cpp",
                 "-g",

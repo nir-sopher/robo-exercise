@@ -1,0 +1,94 @@
+#!/usr/bin/python3
+import brain
+import time
+import sys
+
+import yaml 
+
+#select the net function. defualt is the identity function
+CFG_KEY_NET_FUNCTION_TYPE = "net-function-type"
+#set the initial position, default is 0
+CFG_KEY_INITIAL_POSITION = "initial-position"
+#set the motor count. default is 0
+CFG_KEY_MOTORS_COUNT = "motors-count"
+#set the position of each motor, default is 0
+CFG_KEY_MOTORS_POSITION = "motors-initial-position"
+#set the print freqeuncy
+CFG_KEY_PRINT_EACH_N_CYCLES = "print-each-N-cycles"
+#set runtime limit in seconds, negative to run for ever. default is forever
+CFG_KEY_RUNTIME_LIMIT_SEC = "run-time-limit-sec"
+
+
+
+def main():
+    # getting the config file name
+    if len(sys.argv) != 2:
+        print("Usage: ",sys.argv[0]," <config-file-name>", file=sys.stderr)
+        return -1
+    
+    #reading the config
+    cfgFileName = sys.argv[1]
+    try:
+        with open(cfgFileName) as cfgFd:
+            cfg = yaml.load(cfgFd, Loader=yaml.CLoader)
+    except Exception as err:
+        print(f"Unexpected {err=}, {type(err)=}", file=sys.stderr)
+        return -1
+
+    if not brain.init():
+        print("Failed to init brain module", file=sys.stderr)
+        return -1
+
+    theBrain = brain.Brain()
+
+    if CFG_KEY_INITIAL_POSITION in cfg:
+        if not theBrain.initPosition(cfg[CFG_KEY_INITIAL_POSITION]):
+            print("Failed to init position", file=sys.stderr)
+            return -1
+
+
+    numMotors = 0
+    if CFG_KEY_MOTORS_COUNT in cfg:
+        numMotors = cfg[CFG_KEY_MOTORS_COUNT]
+    motorsPosition = {}
+    if CFG_KEY_MOTORS_POSITION in cfg:
+        motorsPosition = cfg[CFG_KEY_MOTORS_POSITION]
+
+    for motor in range(numMotors):
+        if not theBrain.initAddMotor(str(motor), motorsPosition.get(motor, 0)):
+            print("Failed to init motor", sys.stderr)
+            return -1
+
+    if CFG_KEY_NET_FUNCTION_TYPE in cfg:    
+        if not theBrain.initNetFunction(cfg[CFG_KEY_NET_FUNCTION_TYPE]):
+            print("Failed to brain net function", file=sys.stderr)
+            return -1
+
+    if CFG_KEY_PRINT_EACH_N_CYCLES in cfg:
+        if not theBrain.initPrintEachNSteps(cfg[CFG_KEY_PRINT_EACH_N_CYCLES]):
+           print("Failed to brain print cycle", file=sys.stderr)
+           return -1
+
+    if not theBrain.initDone():
+        print("Failed to init brain", file=sys.stderr)
+        return -1
+
+    if not theBrain.launch():
+        print("Failed to launch brain", file=sys.stderr)
+        return -1
+
+    timeLimit = -1
+    if CFG_KEY_RUNTIME_LIMIT_SEC in cfg:
+        timeLimit = cfg[CFG_KEY_RUNTIME_LIMIT_SEC]
+
+    start = time.time()
+    #TODO add a graceful shutdown on signal
+    while timeLimit < 0 or time.time()-start <= timeLimit:#
+        time.sleep(0.01)
+        
+    theBrain.terminate()
+
+    return 0
+
+if __name__ == "__main__":
+    sys.exit(main())
