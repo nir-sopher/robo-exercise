@@ -28,25 +28,26 @@ namespace brain
             return false;
         }
 
-        if (myPrintEachNSteps > 0 and myStepsCount % myPrintEachNSteps == 0)
+        if (myPrintEachNSteps > 0 && myStepsCount % myPrintEachNSteps == 0)
         {
             std::cout << "Round " << myStepsCount << "\n";
             std::cout << "Position: \n";
             for (auto posState : positionState)
             {
-                std::cout << posState.first<<":"<<posState.second<<", ";
+                std::cout << posState.first << ":" << posState.second << ", ";
             }
             std::cout << "\nMotors Position: \n";
             for (auto motor : motorsState)
             {
-                std::cout << motor.first<<":"<<motor.second<<", ";
-            } 
+                std::cout << motor.first << ":" << motor.second << ", ";
+            }
             std::cout << "\nNet Result: \n";
             for (auto motor : newMotorsState)
             {
-                std::cout << motor.first<<":"<<motor.second<<", ";
+                std::cout << motor.first << ":" << motor.second << ", ";
             }
-            std::cout << "\n" << std::endl;
+            std::cout << "\n"
+                      << std::endl;
         }
 
         // careful here.

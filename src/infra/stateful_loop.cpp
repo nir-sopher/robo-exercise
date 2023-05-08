@@ -7,14 +7,13 @@ namespace infra
     bool StatefulLoop::step()
     {
         // redirect to the step that gets the status
-
         auto callTime = std::chrono::high_resolution_clock::now();
         std::lock_guard<std::shared_timed_mutex> writerLock(myStateLock);
         auto lockTime = std::chrono::high_resolution_clock::now();
 
         if (lockTime - callTime >= std::chrono::microseconds(myLockDelayPeriodUs))
         {
-            //TODO ERROR
+            // TODO ERROR
             myStats.inc("step-delayed-due-to-lock", 1);
         }
 

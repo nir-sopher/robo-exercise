@@ -8,11 +8,11 @@ namespace infra
     class IntStats
     {
     public:
-        void set(std::string aKey, int64_t aVal);
+        void set(const std::string &aKey, int64_t aVal);
 
-        void inc(std::string aKey, int64_t aVal);
+        void inc(const std::string &aKey, int64_t aVal);
 
-        int64_t get(std::string aKey) const;
+        int64_t get(const std::string &aKey) const;
 
         std::map<std::string, int64_t> getAll() const;
 

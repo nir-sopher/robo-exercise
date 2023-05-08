@@ -80,9 +80,7 @@ namespace infra
                 {
                     // issue number 1 - system is loaded. Sleep takes time...
                     myStats.inc("step-delayed-due-to-sleep", 1);
-                }
-                else
-                {
+                } else {
                     // issue number 2 - to much work is done in each step
                     myStats.inc("step-delayed-due-to-work", 1);
                 }
