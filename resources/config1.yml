@@ -1,7 +1,7 @@
-#select the net function. defualt is the identity function
+#select the net function. default is the identity function
 net-function-type: "mul"
 #set the initial position, default is 0
-initial-position: 0.1
+initial-position: 1
 #set the motor count. default is 0
 motors-count: 10
 #set the  position of each motor, default is 0

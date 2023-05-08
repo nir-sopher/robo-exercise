@@ -4,7 +4,6 @@
 #include "position_loop.h"
 #include "motors_loop.h"
 #include "main_loop.h"
-#include "net_function_mul.h"
 
 namespace brain
 {

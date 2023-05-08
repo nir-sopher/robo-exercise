@@ -13,6 +13,7 @@ namespace brain
                                 const ::infra::State &aPositionState, 
                                 ::infra::State *aOutputMotorsStateP) final
         {
+            *aOutputMotorsStateP = aMotorsState;
             return true;
         }
 

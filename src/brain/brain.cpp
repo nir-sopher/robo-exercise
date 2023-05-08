@@ -1,4 +1,5 @@
 #include "brain/brain.h"
+#include "brain/net_function_mul.h"
 #include "brain/net_function_identity.h"
 
 namespace brain
@@ -142,6 +143,7 @@ namespace brain
     {
         // prepare factories
         infra::NetFunction::s_registerType(NetFunctionMul());
+        infra::NetFunction::s_registerType(NetFunctionIdentity());
         return true;
     }
 
