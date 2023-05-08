@@ -1,0 +1,9 @@
+net-function: "mul"
+initial-position: 0.1
+position-noise:
+  min: -1.0
+  max: 1.0
+motors-count: 10
+motors-initial-position: 
+    0: 5.2
+    2: 7.0
