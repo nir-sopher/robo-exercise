@@ -1,5 +1,9 @@
 #include <iostream>
 #include "brain/brain.h"
+#include <pybind11/pybind11.h>
+
+namespace py = pybind11;
+
 
 int main()
 {
@@ -23,3 +27,10 @@ int main()
 
     return 0;
 }
+
+/*
+
+PYBIND11_MODULE(brain, m) {
+    m.doc() = "pybind11 brain plugin"; 
+    m.def("main", &main, "Running the brain");
+}*/
