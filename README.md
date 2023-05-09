@@ -1,4 +1,4 @@
-# brain
+# Brain
 
 `brain` is a C++ based Robot Simulation, with an integral integration with Python.
 
