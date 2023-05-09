@@ -44,6 +44,12 @@ namespace infra
         // return the status of the current run
         Status getStatus() const;
 
+        // return the loop stats.
+        // unsafe - not thread safe
+        IntStats getStatsUnsafe() const {
+            return myStats;
+        }
+
     protected:
         // init behavior - set the behavior in cases a delay causes multiple cycles to be missed.
         // when NOT called - the extra steps are discarded.

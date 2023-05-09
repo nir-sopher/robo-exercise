@@ -31,6 +31,13 @@ namespace brain
         // done working
         void terminate();
 
+        //print current state
+        void printState();
+
+        //print gathered statistics.
+        // Unsafe - not thread safe
+        void printStatsUnsafe();
+
         // program level settings
         static bool s_init();
 

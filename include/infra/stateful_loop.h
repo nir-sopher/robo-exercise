@@ -46,7 +46,7 @@ namespace infra
         // operational
         State myState;
         mutable std::shared_timed_mutex myStateLock;
-        int64_t myLockDelayPeriodUs;
+        int64_t myLockDelayPeriodUs = 0;
     };
 
 } // namespace

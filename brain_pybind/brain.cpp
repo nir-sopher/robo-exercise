@@ -22,7 +22,9 @@ PYBIND11_MODULE(brain, m)
         .def("initPrintEachNSteps", &Brain::initPrintEachNSteps, "Set printouts each N steps of the main loop")
         .def("initDone", &Brain::initDone, "Mark initialization as done")
         .def("launch", &Brain::launch, "Launch the robot")
-        .def("terminate", &Brain::terminate, "Shutdown the robot");
+        .def("terminate", &Brain::terminate, "Shutdown the robot")
+        .def("printState", &Brain::printState, "Print brain state")
+        .def("printStatsUnsafe", &Brain::printStatsUnsafe, "Print brain stats. NOT thread safe");
 
     m.def("init", &init, "A module init function");
 }

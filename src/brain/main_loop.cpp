@@ -42,9 +42,9 @@ namespace brain
             myPeriodingPrintCycleCount > 0 && myStepsCount % myPeriodingPrintCycleCount == 0)
         {
             (*myPeriodicPrintStreamP) << "Round " << myStepsCount << "\n";
-            (*myPeriodicPrintStreamP) << "Position: \n";
+            (*myPeriodicPrintStreamP) << "Position State: \n";
             (*myPeriodicPrintStreamP) << positionState << "\n";
-            (*myPeriodicPrintStreamP) << "Motors Position: \n";
+            (*myPeriodicPrintStreamP) << "Motors State: \n";
             (*myPeriodicPrintStreamP) << motorsState << "\n";
             (*myPeriodicPrintStreamP) << "Net Result: \n";
             (*myPeriodicPrintStreamP) << newMotorsState << "\n";

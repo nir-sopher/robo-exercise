@@ -51,5 +51,11 @@ int main()
 
     brain.terminate();
 
+    std::cout << "Final state:" <<std::endl;
+    brain.printState();
+
+    std::cout << "Stats:" <<std::endl;
+    brain.printStatsUnsafe();
+
     return 0;
 }

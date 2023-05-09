@@ -67,6 +67,7 @@ namespace infra
             {
                 std::this_thread::sleep_for(timeOfThisCycle - now);
                 myStats.inc("sleep-needed", 1);
+                slept = true; 
             }
 
             // OK. Time to run
@@ -81,7 +82,7 @@ namespace infra
                     // issue number 1 - system is loaded. Sleep takes time...
                     myStats.inc("step-delayed-due-to-sleep", 1);
                 } else {
-                    // issue number 2 - to much work is done in each step
+                    // issue number 2 - too much work is done in each step
                     myStats.inc("step-delayed-due-to-work", 1);
                 }
             }

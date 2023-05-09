@@ -88,6 +88,11 @@ def main():
         
     theBrain.terminate()
 
+    print("Final state:")
+    theBrain.printState()
+    print("Stats:")
+    theBrain.printStatsUnsafe()
+
     return 0
 
 if __name__ == "__main__":

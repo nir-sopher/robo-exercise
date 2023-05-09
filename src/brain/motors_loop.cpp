@@ -6,6 +6,7 @@ namespace brain
     MotorsLoop::MotorsLoop(const ::infra::State &aMotorsInitialState, int64_t aPeriodUs) : ::infra::StatefulLoop(aPeriodUs)
     {
         initDelayWarningThreshold(aPeriodUs / 10);
+        initLockDelayWarningThreshold(aPeriodUs / 10);
         initState(aMotorsInitialState);
     }
 

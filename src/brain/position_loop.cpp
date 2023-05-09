@@ -6,6 +6,7 @@ namespace brain
     PositionLoop::PositionLoop(const ::infra::State &aInitialPosState, int64_t aPeriodUs) : ::infra::StatefulLoop(aPeriodUs), myNoiseDistribution(MIN_NOISE_LEVEL, MAX_NOISE_LEVEL)
     {
         initDelayWarningThreshold(aPeriodUs / 10);
+        initLockDelayWarningThreshold(aPeriodUs / 10);
         initState(aInitialPosState);
     }
 

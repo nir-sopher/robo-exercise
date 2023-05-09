@@ -11,7 +11,8 @@ namespace infra
         std::lock_guard<std::shared_timed_mutex> writerLock(myStateLock);
         auto lockTime = std::chrono::high_resolution_clock::now();
 
-        if (lockTime - callTime >= std::chrono::microseconds(myLockDelayPeriodUs))
+        if (myLockDelayPeriodUs > 0 &&
+            lockTime - callTime >= std::chrono::microseconds(myLockDelayPeriodUs))
         {
             // TODO ERROR
             myStats.inc("step-delayed-due-to-lock", 1);

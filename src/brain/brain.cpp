@@ -90,7 +90,8 @@ namespace brain
         myMotorsLoop.reset(new MotorsLoop(myMotorsInitialState));
         myMainLoop.reset(new MainLoop(myMotorsLoop, myPositionLoop, myNetFunctionP));
 
-        if (myPrintEachNSteps > 0){
+        if (myPrintEachNSteps > 0)
+        {
             myMainLoop->initPeriodicPrint(&std::cout);
             myMainLoop->setPeriodicPrintFreq(myPrintEachNSteps);
         }
@@ -140,6 +141,24 @@ namespace brain
         myPositionLoop->waitToTerminate();
         myMotorsLoop->waitToTerminate();
         myMainLoop->waitToTerminate();
+    }
+
+    void Brain::printState()
+    {
+        std::cout << "Position State:\n"
+                  << myPositionLoop->getState() << "\n";
+        std::cout << "Motors State:\n"
+                  << myMotorsLoop->getState() << std::endl;
+    }
+
+    void Brain::printStatsUnsafe()
+    {
+        std::cout << "Position Loop Stats:\n"
+                  << myPositionLoop->getStatsUnsafe() << "\n";
+        std::cout << "Motors Loop Stats:\n"
+                  << myMotorsLoop->getStatsUnsafe() << "\n";
+        std::cout << "Main Loop Stats:\n"
+                  << myMainLoop->getStatsUnsafe() << std::endl;
     }
 
     bool Brain::s_init()
