@@ -4,7 +4,7 @@
 
 ## Usage
 ```sh
-./brain <config-file-path>`
+./brain <config-file-path>
 ```
 
 Where `config-file` is the path of a `yaml` config file, controlling both brain attributes (e.g. num of motors) and execution params (e.g. how long to run).
