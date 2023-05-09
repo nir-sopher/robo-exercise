@@ -16,6 +16,16 @@ namespace brain
         initDelayWarningThreshold(aPeriodUs / 10);
     }
 
+    void MainLoop::initPeriodicPrint(std::ostream *aStreamP)
+    {
+        myPeriodicPrintStreamP = aStreamP;
+    }
+
+    void MainLoop::setPeriodicPrintFreq(int64_t aCycleCount)
+    {
+        myPeriodingPrintCycleCount = aCycleCount;
+    }
+
     bool MainLoop::step()
     {
         ::infra::State motorsState = myMotorLoopP->getState();
@@ -28,26 +38,17 @@ namespace brain
             return false;
         }
 
-        if (myPrintEachNSteps > 0 && myStepsCount % myPrintEachNSteps == 0)
+        if (myPeriodicPrintStreamP != NULL &&
+            myPeriodingPrintCycleCount > 0 && myStepsCount % myPeriodingPrintCycleCount == 0)
         {
-            std::cout << "Round " << myStepsCount << "\n";
-            std::cout << "Position: \n";
-            for (auto posState : positionState)
-            {
-                std::cout << posState.first << ":" << posState.second << ", ";
-            }
-            std::cout << "\nMotors Position: \n";
-            for (auto motor : motorsState)
-            {
-                std::cout << motor.first << ":" << motor.second << ", ";
-            }
-            std::cout << "\nNet Result: \n";
-            for (auto motor : newMotorsState)
-            {
-                std::cout << motor.first << ":" << motor.second << ", ";
-            }
-            std::cout << "\n"
-                      << std::endl;
+            (*myPeriodicPrintStreamP) << "Round " << myStepsCount << "\n";
+            (*myPeriodicPrintStreamP) << "Position: \n";
+            (*myPeriodicPrintStreamP) << positionState << "\n";
+            (*myPeriodicPrintStreamP) << "Motors Position: \n";
+            (*myPeriodicPrintStreamP) << motorsState << "\n";
+            (*myPeriodicPrintStreamP) << "Net Result: \n";
+            (*myPeriodicPrintStreamP) << newMotorsState << "\n";
+            (*myPeriodicPrintStreamP) << std::endl;
         }
 
         // careful here.

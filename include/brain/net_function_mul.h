@@ -10,7 +10,7 @@ namespace brain
     public:
         // the actual operation of the net-function
         virtual bool operator()(const ::infra::State &aMotorsState,
-                                const ::infra::State &aPositionState, 
+                                const ::infra::State &aPositionState,
                                 ::infra::State *aOutputMotorsStateP) final;
 
         // factory supporting functions

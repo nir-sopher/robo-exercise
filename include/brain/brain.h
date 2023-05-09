@@ -13,12 +13,16 @@ namespace brain
         // initialize the object, load configuration
         bool initPosition(double aInitialPosition);
 
+        // add a motor with the provided initial position
         bool initAddMotor(const std::string &aMotorId, double aInitialPosition);
 
+        // set the "net function". if not set, defualt is the "identity" function
         bool initNetFunction(const std::string &aNEtFunctionType);
 
+        // set mainloop print cycle
         bool initPrintEachNSteps(int64_t aN);
 
+        // get ready to work. must be called before launch but after all "init..." functions
         bool initDone();
 
         // start working

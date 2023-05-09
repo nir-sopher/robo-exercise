@@ -1,5 +1,6 @@
 #include <iostream>
 #include "brain/brain.h"
+#include "brain/net_function_mul.h"
 
 int main()
 {

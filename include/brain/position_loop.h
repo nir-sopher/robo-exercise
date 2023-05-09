@@ -9,6 +9,7 @@ namespace brain
     {
     public:
         inline static const std::string POS_KEY = "pos";
+
         PositionLoop(const ::infra::State &aInitialState, int64_t aPeriodUs = 4000);
 
     protected:

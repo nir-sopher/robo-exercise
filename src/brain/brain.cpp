@@ -1,3 +1,5 @@
+#include <iostream>
+
 #include "brain/brain.h"
 #include "brain/net_function_mul.h"
 #include "brain/net_function_identity.h"
@@ -89,7 +91,8 @@ namespace brain
         myMainLoop.reset(new MainLoop(myMotorsLoop, myPositionLoop, myNetFunctionP));
 
         if (myPrintEachNSteps > 0){
-            myMainLoop->setPrintEachNSteps(myPrintEachNSteps);
+            myMainLoop->initPeriodicPrint(&std::cout);
+            myMainLoop->setPeriodicPrintFreq(myPrintEachNSteps);
         }
 
         myInitDone = true;
