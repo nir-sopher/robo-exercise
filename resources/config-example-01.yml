@@ -1,14 +1,14 @@
-#select the net function. default is the identity function
+#select the net function. default is the "identity" function
 net-function-type: "mul"
 #set the initial position, default is 0
 initial-position: 1
 #set the motor count. default is 0
 motors-count: 10
-#set the  position of each motor, default is 0
+#set the position of each motor by its index, value for non-specified motors is 0
 motors-initial-position: 
     0: 5.2
     2: 7.0
 #set the print freqeuncy
 print-each-N-cycles: 10
-#set runtime limit in seconds, negative to run for ever. default is forever
+#set execution time limit in seconds, negative to run forever. default is forever
 run-time-limit-sec: 5.5
