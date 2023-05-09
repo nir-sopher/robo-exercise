@@ -90,7 +90,7 @@ def main():
 
     print("Final state:")
     theBrain.printState()
-    print("Stats:")
+    print("\nStats:")
     theBrain.printStatsUnsafe()
 
     return 0

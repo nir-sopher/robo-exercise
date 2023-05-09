@@ -1,10 +1,11 @@
 #include "infra/state.h"
+#include <ostream>
 
 std::ostream &operator<<(std::ostream &aOstream, const infra::State &aState)
 {
     for (auto item : aState)
     {
-        aOstream << item.first << std::string(":") << std::to_string(item.second) << std::string(" ");
+        aOstream << item.first << ":" << item.second << " ";
     }
     return aOstream;
 }

@@ -1,6 +1,7 @@
 
 
 #include "infra/int_stats.h"
+#include <ostream>
 
 namespace infra
 {
@@ -38,7 +39,7 @@ namespace infra
     {
         for (auto item : aIntStats.myData)
         {
-            aOstream << item.first << std::string(":") << std::to_string(item.second) << std::string(" ");
+            aOstream << item.first << ":" << item.second << " ";
         }
         return aOstream;
     }
