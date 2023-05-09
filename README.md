@@ -32,7 +32,7 @@ The `brain` executalble, along with relevant libraries, would be created in the 
 You may then execute brain. E.g.:
 
 ```sh
-./release/brain resources/config1.yml
+./release/brain resources/config-example-01.yml
 ```
 
 **Note:** In order to build `brain` you would need [pybind11](https://pybind11.readthedocs.io/en/stable/) to be installed on your server. If needed please follwo the [installation instruction](https://pybind11.readthedocs.io/en/stable/installing.html).
